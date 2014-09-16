@@ -1,3 +1,3 @@
 require('./landing');
-
+require('./collection');
 
