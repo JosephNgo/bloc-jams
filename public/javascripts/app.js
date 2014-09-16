@@ -110,6 +110,8 @@ var buildAlbumThumbnail = function() {
       + '      <br/>'
       + '      X songs'
       + '      <br/>'
+      + '      X:XX Total Length'
+      + '      <br/>'
       + '    </p>'
       + '  </div>'
       + '</div>';
