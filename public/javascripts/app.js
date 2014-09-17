@@ -108,34 +108,79 @@ var albumPicasso = {
      ]
 };
  
- // Another Example Album
- var albumMarconi = {
-   name: 'The Telephone',
-   artist: 'Guglielmo Marconi',
-   label: 'EM',
-   year: '1909',
-   albumArtUrl: '/images/album-placeholders/album-3.jpg',
-   albumArtAltUrl: '/images/album-placeholders/album-2.jpg',
-   songs: [
-       { name: 'Hello, Operator?', length: '1:01' },
-       { name: 'Ring, ring, ring', length: '5:01' },
-       { name: 'Fits in your pocket', length: '3:21'},
-       { name: 'Can you hear me now?', length: '3:14' },
-       { name: 'Wrong phone number', length: '2:15'}
-     ]
- };
+// Another Example Album
+var albumMarconi = {
+ name: 'The Telephone',
+ artist: 'Guglielmo Marconi',
+ label: 'EM',
+ year: '1909',
+ albumArtUrl: '/images/album-placeholders/album-3.jpg',
+ albumArtAltUrl: '/images/album-placeholders/album-2.jpg',
+ songs: [
+     { name: 'Hello, Operator?', length: '1:01' },
+     { name: 'Ring, ring, ring', length: '5:01' },
+     { name: 'Fits in your pocket', length: '3:21'},
+     { name: 'Can you hear me now?', length: '3:14' },
+     { name: 'Wrong phone number', length: '2:15'}
+   ]
+};
 
-  var createSongRow = function(songNumber, songName, songLength) {
-   var template =
-       '<tr>'
-     + '  <td class="col-md-1">' + songNumber + '</td>'
-     + '  <td class="col-md-9">' + songName + '</td>'
-     + '  <td class="col-md-2">' + songLength + '</td>'
-     + '</tr>'
-     ;
+var currentlyPlayingSong = null; 
+
+var createSongRow = function(songNumber, songName, songLength) {
+ var template =
+     '<tr>'
+   + '  <td class="song-number col-md-1" data-song-number="'+ songNumber +'">' + songNumber + '</td>'
+   + '  <td class="col-md-9">' + songName + '</td>'
+   + '  <td class="col-md-2">' + songLength + '</td>'
+   + '</tr>'
+   ;
+
+ //Instead of returning the row immediately, we'll attach hover
+ //functionality to it first
+  var $row = $(template);
+
+  var onHover = function(event) {
+   songNumberCell = $(this).find('.song-number');
+   songNumber = songNumberCell.data('song-number');
+   if (songNumber !== currentlyPlayingSong) {
+    songNumberCell.html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
+   }
+  };
+
+  var offHover = function(event) {
+   songNumberCell = $(this).find('.song-number');
+   songNumber = songNumberCell.data('song-number');
+   if (songNumber !== currentlyPlayingSong) {
+    songNumberCell.html(songNumber);
+   }
+  };
+
+  var clickHandler = function(event) {
+    songNumber = $(this).data('song-number');
+
+     if (currentlyPlayingSong !== null) {
+       // Revert to song number for currently playing song because user started playing new song.
+       currentlyPlayingCell = $('.song-number[data-song-number="' + currentlyPlayingSong + '"]');
+       currentlyPlayingCell.html(currentlyPlayingSong);
+     }
  
-   return $(template);
- };
+     if (currentlyPlayingSong !== songNumber) {
+       // Switch from Play -> Pause button to indicate new song is playing.
+       $(this).html('<a class="album-song-button"><i class="fa fa-pause"></i></a>');
+       currentlyPlayingSong = songNumber;
+     }
+     else if (currentlyPlayingSong === songNumber) {
+       // Switch from Pause -> Play button to pause currently playing song.
+       $(this).html('<a class="album-song-button"><i class="fa fa-play"></i></a>');
+       currentlyPlayingSong = null;
+     }
+   };
+  
+  $row.find('.song-number').click(clickHandler);
+  $row.hover(onHover, offHover);
+  return $row;
+};
 
   var changeAlbumView = function(album) {
    // Update the album title
