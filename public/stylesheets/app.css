@@ -164,6 +164,9 @@ td.song-number {
   .player-bar .play-controls a {
     font-size: 20px;
     vertical-align: middle; }
+  .player-bar .play-controls a:hover {
+    transition: color 1.5s ease;
+    color: #df2262; }
   .player-bar .play-controls .previous {
     margin-right: 65px; }
   .player-bar .play-controls .play-pause {

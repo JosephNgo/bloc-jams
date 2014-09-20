@@ -37,6 +37,11 @@
       vertical-align: middle;
     }
 
+    a:hover {
+      transition: color 1.5s ease;
+      color: #DF2262;
+    }
+
     .previous {
       margin-right: 65px;
     }
