@@ -89,7 +89,7 @@ var createSongRow = function(songNumber, songName, songLength) {
   return $row;
 };
 
-  var changeAlbumView = function(album) {
+var changeAlbumView = function(album) {
    // Update the album title
    var $albumTitle = $('.album-title');
    $albumTitle.text(album.name);
@@ -121,9 +121,7 @@ var createSongRow = function(songNumber, songName, songLength) {
      var $newRow = createSongRow(i + 1, songData.name, songData.length);
      $songList.append($newRow);
    }
- 
  };
- 
 
  // This 'if' condition is used to prevent the jQuery modifications
  // from happening on non-Album view pages.
