@@ -134,7 +134,7 @@ var changeAlbumView = function(album) {
 
   var percentageString = offsetXPercent + '%';
   $seekBar.find('.fill').width(percentageString);
-  $seekBar.find('.thumb').css({left: percentageString});
+  $seekBar.find('.thumb').css({left: percentageString}); //why is this is the same percentage as .fill? 
   console.log(percentageString);
  }
 

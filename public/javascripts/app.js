@@ -227,7 +227,7 @@ var changeAlbumView = function(album) {
 
   var percentageString = offsetXPercent + '%';
   $seekBar.find('.fill').width(percentageString);
-  $seekBar.find('.thumb').css({left: percentageString});
+  $seekBar.find('.thumb').css({left: percentageString}); //why is this is the same percentage as .fill? 
   console.log(percentageString);
  }
 
@@ -275,7 +275,7 @@ var changeAlbumView = function(album) {
 require('./landing');
 require('./collection');
 require('./album');
-
+require('./profile');
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {
@@ -395,6 +395,28 @@ var updateCollectionView = function() {
       });
     });
   });
+});
+
+;require.register("scripts/profile", function(exports, require, module) {
+var tabsContainer = ".user-profile-tabs-container"
+var selectTabHandler = function(event) {
+  $tab = $(this);
+  $(tabsContainer + " li").removeClass('active');
+  $tab.parent().addClass('active');
+  selectedTabName = $tab.attr('href');
+  console.log(selectedTabName);
+  $(".tab-pane").addClass('hidden');
+  $(selectedTabName).removeClass('hidden');
+  event.preventDefault();
+};
+
+if (document.URL.match(/\/profile.html/)) {
+  $(document).ready(function() {
+    var $tabs = $(tabsContainer + " a");
+    $tabs.click(selectTabHandler);
+    $tabs[0].click();
+  });
+}
 });
 
 ;
