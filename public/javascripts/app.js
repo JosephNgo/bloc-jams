@@ -235,8 +235,8 @@ var changeAlbumView = function(album) {
    $seekBars = $('.player-bar .seek-bar');
    $seekBars.click(function(event) {
      updateSeekPercentage($(this), event);
-     console.log('x:'+ event.screenX);
-     console.log('y:'+ event.screenY);
+     console.log('x:'+ event.pageX);
+     console.log('y:'+ event.pageY);
    });
 
    $seekBars.find('.thumb').mousedown(function(event){
