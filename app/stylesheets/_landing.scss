@@ -1,7 +1,9 @@
+$purple: #2F1D57;
+
 .hero-content {
-  background-color: #2F1D57;
+  background-color: $purple;
   padding: 100px 0;
-  background: #2F1D57;
+  background: $purple;
 }
  
 .hero-content h1 {
