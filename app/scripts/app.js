@@ -1,16 +1,16 @@
 // require('./landing');
 // require('./collection');
 // require('./album');
-// require('./profile');
-blocJams = angular.module("BlocJams", ["ui.router"]);
+require('./profile');
+blocJams = angular.module('BlocJams', ['ui.router']);
 
-blocJams.config(["$stateProvider", "$locationProvider", function($stateProvider, $locationProvider){
+blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 
-  $stateProvider.state("landing", {
-    url: "/", 
-    controller: "Landing.controller", 
-    templateUrl: "/templates/landing.html"
+  $stateProvider.state('landing', {
+    url: '/', 
+    controller: 'Landing.controller', 
+    templateUrl: '/templates/landing.html'
   });
 
   // $stateProvider.state("song", {
