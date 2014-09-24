@@ -281,17 +281,29 @@ blocJams = angular.module('BlocJams', ['ui.router']);
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 
-  $stateProvider.state('landing', {
-    url: '/', 
-    controller: 'Landing.controller', 
-    templateUrl: '/templates/landing.html'
+   // $stateProvider.state('landing', {
+   //   url: '/',
+   //   controller: 'Landing.controller',
+   //   templateUrl: '/templates/landing.html'
+   // });
+
+  $stateProvider.state("song", {
+    url: "/", 
+    controller: "Song.controller", 
+    templateUrl: "/templates/song.html"
   });
 
-  // $stateProvider.state("song", {
-  //   url: "/", 
-  //   controller: "Song.controller", 
-  //   templateUrl: "/templates/song.html"
-  // });
+  // $stateProvider
+  //   .state('landing', {
+  //     url: '/', 
+  //     controller: 'Landing.controller',
+  //     templateUrl: '/templates/landing.html'
+  //   })
+  //   .state('song', {
+  //     url: '/', 
+  //     templateUrl: '/templates/song.html'
+  //     controller: 'Song.controller'
+  //   });
 }]);
 
 blocJams.controller("Landing.controller", ["$scope", function($scope) {
