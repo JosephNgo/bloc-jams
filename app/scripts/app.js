@@ -1,35 +1,22 @@
 // require('./landing');
 // require('./collection');
 // require('./album');
-require('./profile');
+// require('./profile');
 blocJams = angular.module('BlocJams', ['ui.router']);
 
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 
-   // $stateProvider.state('landing', {
-   //   url: '/',
-   //   controller: 'Landing.controller',
-   //   templateUrl: '/templates/landing.html'
-   // });
-
-  $stateProvider.state("song", {
+  $stateProvider.state("landing", {
     url: "/", 
+    controller: "Landing.controller", 
+    templateUrl: "/templates/landing.html"
+  });
+  $stateProvider.state("song", {
+    url: "/song", 
     controller: "Song.controller", 
     templateUrl: "/templates/song.html"
   });
-
-  // $stateProvider
-  //   .state('landing', {
-  //     url: '/', 
-  //     controller: 'Landing.controller',
-  //     templateUrl: '/templates/landing.html'
-  //   })
-  //   .state('song', {
-  //     url: '/', 
-  //     templateUrl: '/templates/song.html'
-  //     controller: 'Song.controller'
-  //   });
 }]);
 
 blocJams.controller("Landing.controller", ["$scope", function($scope) {
@@ -62,7 +49,3 @@ blocJams.controller("Landing.controller", ["$scope", function($scope) {
     console.log($scope.albumURLs);
   };
 }]);
-
-// blocJams.controller("Song.controller", ["$scope", function($scope){
-
-// }]);
