@@ -11,6 +11,19 @@ $white: white;
   // Pushes the album information down and makes sure there's sufficient space at the bottom of the page
   margin-top: 45px;
   margin-bottom: 20px;
+
+  h3 {
+    font-size: 48px;
+    font-weight: 300;
+  }
+  h4 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  h5 {
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
 
 .album-header-information h3, .album-header-information h4, .album-header-information h5 {
@@ -20,31 +33,14 @@ $white: white;
   line-height: 150%;
 }
 
-.album-header-information h3 {
-  font-size: 48px;
-  font-weight: 300;
-}
-
-.album-header-information h4 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.album-header-information h5 {
-  font-size: 16px;
-  font-weight: 500;
-}
-
 // This styles our Song Listing
 .table.album-song-listing {
   // Override the font for the entire table.
   font-weight: 300;
-}
-
-// Override the defaults that Bootstrap sets.
-.table.album-song-listing  td {
-  padding: 20px;
-  border-top: 1px solid rgba(255, 255, 255, .4);
+  td {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, .4);
+  }
 }
 
 .album-song-button {
@@ -56,6 +52,14 @@ $white: white;
   display: inline-block;
   width: 28px;
   height: 28px;
+
+  i {
+    line-height: 28px;
+  }
+
+  .fa-play {
+    padding-left: 5px;
+  }
 }
 
 .album-song-button:hover {
@@ -64,13 +68,6 @@ $white: white;
   background-color: $hotPink;
 }
 
-.album-song-button i {
-  line-height: 28px;
-}
-
-.album-song-button .fa-play {
-  padding-left: 5px;
-}
 
 .album-song-listing td {
   vertical-align: center;
