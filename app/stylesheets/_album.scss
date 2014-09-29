@@ -4,6 +4,10 @@ $white: white;
 .album-header-container {
   margin-top: 55px;
   margin-bottom: 40px;
+
+  img {
+    width: 100%;
+  }
 }
 
 // This styles the right side of our Album Header
