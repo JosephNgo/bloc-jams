@@ -1,0 +1,37 @@
+<div class="album-container container">
+  <div class="album-header-container row"><!-- Album header -->
+    <div class="col-md-3"><!-- Album image -->
+      <img ng-src="{{ album.albumArtUrl }}">
+    </div><!-- end of col-md-3 -->
+    <div class="album-header-information col-md-8 col-md-push-1"><!-- Album information -->
+      <h3 class="album-title">{{ album.name }}</h3>
+      <h4 class="album-artist">{{ album.artist }}</h4>
+      <h5 class="album-meta-info">{{ album.year }} on {{ album.label }}</h5>
+    </div><!-- end of album-header-information col-md-8 col-md-push-1 -->
+  </div><!-- end of album-header-container row -->
+  <div class="row"><!-- song table -->
+    <table class="album-song-listening table">
+      <tr ng-repeat="song in album.songs" ng-mouseenter="onHoverSong(song)" ng-mouseleave="offHoverSong(song)">
+        <td class="song-number col-md-1">
+          <span ng-switch="getSongState(song)">
+            <span ng-switch-when="playing">
+              <a class="album-song-button" ng-click="pauseSong(song)">
+                <i class="fa fa-pause"></i>
+              </a>
+            </span><!-- end of playing -->
+            <span ng-switch-when="hovered">
+              <a class="album-song-button" ng-click="playSong(song)">
+                <i class="fa fa-play"></i>
+              </a>
+            </span><!-- end of hovered -->
+            <span ng-switch-default>
+              {{ $index + 1}}
+            </span><!-- end of ng-switch-default -->
+          </span><!-- end of getSongState(song) -->
+        </td>
+        <td class="col-md-9">{{ song.name }}</td>
+        <td class="col-md-2">{{ song.length }}</td>
+      </tr>
+    </table><!-- end of table album-song-listening -->
+  </div><!-- end of row -->
+</div><!-- end of album-container container -->
