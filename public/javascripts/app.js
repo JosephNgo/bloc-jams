@@ -347,7 +347,7 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
   };
 }]);
 
-blocJams.controller('Landing.controller', ['$scope', function($scope) {
+blocJams.controller('Collection.controller', ['$scope', function($scope) {
   $scope.albums = [];
   for (var i = 0; i < 33; i++) {
     $scope.albums.push(angular.copy(albumPicasso));
