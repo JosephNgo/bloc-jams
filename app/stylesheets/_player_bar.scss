@@ -35,8 +35,12 @@
     a {
       font-size: 20px;
       vertical-align: middle;
+      &.hideControl {
+      visibility: hidden;
+      }
     }
 
+    
     a:hover {
       transition: color 1.5s ease;
       color: #DF2262;
@@ -50,6 +54,7 @@
       margin-right: 60px;
       font-size: 30px
     }
+
   }
 
   .currently-playing {

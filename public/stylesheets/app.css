@@ -145,6 +145,8 @@ td.song-number {
   .player-bar .play-controls a {
     font-size: 20px;
     vertical-align: middle; }
+    .player-bar .play-controls a.hideControl {
+      visibility: hidden; }
   .player-bar .play-controls a:hover {
     transition: color 1.5s ease;
     color: #df2262; }
