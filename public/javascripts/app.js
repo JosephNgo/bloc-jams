@@ -279,19 +279,19 @@ var changeAlbumView = function(album) {
 
 // Example Album
 var albumPicasso = {
-   name: 'The Colors',
-   artist: 'Pablo Picasso',
-   label: 'Cubism',
-   year: '1881',
-   albumArtUrl: '/images/album-placeholders/album-1.jpg',
-   albumArtAltUrl: '/images/album-placeholders/album-8.jpg',
-   songs: [
-       { name: 'Blue', length: '4:26' },
-       { name: 'Green', length: '3:14' },
-       { name: 'Red', length: '5:01' },
-       { name: 'Pink', length: '3:21'},
-       { name: 'Magenta', length: '2:15'}
-     ]
+  name: 'The Colors',
+  artist: 'Pablo Picasso',
+  label: 'Cubism',
+  year: '1881',
+  albumArtUrl: '/images/album-placeholders/album-1.jpg',
+  albumArtAltUrl: '/images/album-placeholders/album-8.jpg',
+  songs: [
+    { name: 'Blue', length: '4:26' },
+    { name: 'Green', length: '3:14' },
+    { name: 'Red', length: '5:01' },
+    { name: 'Pink', length: '3:21'},
+    { name: 'Magenta', length: '2:15'}
+  ]
 };
 
 blocJams = angular.module('BlocJams', ['ui.router']);
@@ -398,6 +398,11 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
 }]);
 
 blocJams.service('SongPlayer', function(){
+  var trackIndex = function(album, song) {
+    return album.songs.indexOf(song);
+    // return album.songs;
+  };
+
   return {
     currentSong: null, 
     CurrentAlbum: null,
@@ -409,8 +414,24 @@ blocJams.service('SongPlayer', function(){
     pause: function() {
       this.playing = false;
     }, 
+    next: function() {
+      var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
+      currentTrackIndex++;
+      if (currentTrackIndex >= this.currentAlbum.songs.length) {
+        currentTrackIndex = 0;
+      }
+      this.currentSong = this.currentAlbum.songs[currentTrackIndex];
+    },
+    previous: function() {
+      var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
+      currentTrackIndex--;
+      if (currentTrackIndex < 0) {
+        currentTrackIndex = this.currentAlbum.songs.length - 1;
+      }
+      this.currentSong = this.currentAlbum.songs[currentTrackIndex];
+    },
     setSong: function(album, song) {
-      this.CurrentAlbum = album;
+      this.currentAlbum = album;
       this.currentSong = song;
     }
   };
