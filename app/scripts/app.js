@@ -140,6 +140,13 @@ blocJams.service('SongPlayer', function(){
     playing: false,
 
     play: function() {
+      if (currentSoundFile == null) {
+        currentSoundFile = new buzz.sound(albumPicasso.songs[0].audioUrl, {
+        formats: ["mp3"],
+        preload: true
+        });
+        currentSong = albumPicasso.songs[0];
+      }
       this.playing = true;
       currentSoundFile.play();
     }, 
@@ -150,11 +157,10 @@ blocJams.service('SongPlayer', function(){
     next: function() {
       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
       currentTrackIndex++;
-      if (currentTrackIndex >= this.currentAlbum.songs.length) {
-        currentTrackIndex = 0;
-      }
+      // if (currentTrackIndex > this.currentAlbum.songs.length) {
+      //   currentTrackIndex = 0;
+      // }
       this.currentSong = this.currentAlbum.songs[currentTrackIndex];
-      console.log(this.currentSong);
       var song = this.currentAlbum.songs[currentTrackIndex];
       this.setSong(this.currentAlbum, song);
     },
@@ -223,3 +229,8 @@ blocJams.directive('slider', function() {
     }
   };
 });
+
+// blocJams.service('ConsoleLogger', function() {
+//   var userMessage = (by.model('userMessage')); 
+//   console.log(userMessage);
+// });
