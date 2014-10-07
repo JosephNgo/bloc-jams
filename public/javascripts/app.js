@@ -441,9 +441,9 @@ blocJams.service('SongPlayer', function(){
     previous: function() {
       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
       currentTrackIndex--;
-      if (currentTrackIndex < 0) {
-        currentTrackIndex = this.currentAlbum.songs.length - 1;
-      }
+      // if (currentTrackIndex < 0) {
+      //   currentTrackIndex = this.currentAlbum.songs.length - 1;
+      // }
       var song = this.currentAlbum.songs[currentTrackIndex];
       this.setSong(this.currentAlbum, song);
     },
@@ -462,45 +462,58 @@ blocJams.service('SongPlayer', function(){
   };
 });
 
-blocJams.directive('slider', function() {
-  var updateSeekPercentage = function($seekBar, event) {
-    var barWidth = $seekBar.width();
-    var offsetX =  event.pageX - $seekBar.offset().left;
- 
-    var offsetXPercent = (offsetX  / $seekBar.width()) * 100;
+blocJams.directive('slider', ['$document', function($document) {
+  var calculateSliderPercentFromMouseEvent = function($slider, event) {
+    var offsetX = event.pageX - $slider.offset().left;
+    var sliderWidth = $slider.width();
+    var offsetXPercent = (offsetX / sliderWidth);
     offsetXPercent = Math.max(0, offsetXPercent);
-    offsetXPercent = Math.min(100, offsetXPercent);
- 
-    var percentageString = offsetXPercent + '%';
-    $seekBar.find('.fill').width(percentageString);
-    $seekBar.find('.thumb').css({left: percentageString});
+    offsetXPercent = Math.min(1, offsetXPercent);
+    return offsetXPercent;
   }
 
   return {
     templateUrl: '/templates/directives/slider.html',
     replace: true, 
     restrict: 'E',
+    scope: {},
     link: function(scope, element, attributes) {
+      scope.value = 0;
+      scope.max = 200;
       var $seekBar = $(element);
 
-      $seekBar.click(function(event) {
-        updateSeekPercentage($seekBar, event);
-      });
+      var precentString = function() {
+        percent = Number(scope.value) / Number(scope.max) * 100;
+        return percent + "%";
+      }
 
-      $seekBar.find('thumb').mousedown(function(event){
-        $seekBar.addClass('no-animate');
+      scope.fillStyle = function() {
+        return {width: precentString()};
+      }
 
-        $(document).bind('mousemove.thumb', function(){
-          updateSeekPercentage($seekBar, event);
-        });
+      scope.thumbStyle = function() {
+        return {left: precentString()};
+      }
 
-        $(document).bind('mouseup.thumb', function(){
-          $seekBar.removeClass('no-animate');
-          $(document).unbind('mousemove.thumb');
-          $(document).unbind('mouseup.thumb');
-        });
-      });
+      scope.onClickSlider = function(event) {
+        var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
+        scope.value = percent * scope.max;
+      }
     }
+
+    scope.trackThumb = function() {
+      $document.bind('mousemove.thumb', function(event){
+        var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
+        scope.$apply(function(){
+          scope.value = percent * scope.max;
+        });
+      });
+
+      $document.bind('mouseup.thumb', function(){
+        $document.unbind('mousemove.thumb');
+        $document.unbind('mouseup.thumb');
+      });
+    };
   };
 });
 
