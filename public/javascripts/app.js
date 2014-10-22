@@ -463,6 +463,7 @@ blocJams.service('SongPlayer', function(){
 });
 
 blocJams.directive('slider', ['$document', function($document) {
+
   var calculateSliderPercentFromMouseEvent = function($slider, event) {
     var offsetX = event.pageX - $slider.offset().left;
     var sliderWidth = $slider.width();
@@ -499,23 +500,23 @@ blocJams.directive('slider', ['$document', function($document) {
         var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
         scope.value = percent * scope.max;
       }
-    }
 
-    scope.trackThumb = function() {
-      $document.bind('mousemove.thumb', function(event){
-        var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
-        scope.$apply(function(){
-          scope.value = percent * scope.max;
+      scope.trackThumb = function() {
+        $document.bind('mousemove.thumb', function(event){
+          var percent = calculateSliderPercentFromMouseEvent($seekBar, event);
+          scope.$apply(function(){
+            scope.value = percent * scope.max;
+          });
         });
-      });
 
-      $document.bind('mouseup.thumb', function(){
-        $document.unbind('mousemove.thumb');
-        $document.unbind('mouseup.thumb');
-      });
-    };
+        $document.bind('mouseup.thumb', function(){
+          $document.unbind('mousemove.thumb');
+          $document.unbind('mouseup.thumb');
+        });
+      };
+    } 
   };
-});
+}]);
 
 // blocJams.service('ConsoleLogger', function() {
 //   var userMessage = (by.model('userMessage')); 

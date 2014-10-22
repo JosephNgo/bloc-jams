@@ -189,7 +189,7 @@ blocJams.service('SongPlayer', function(){
 });
 
 blocJams.directive('slider', ['$document', function($document) {
-  
+
   var calculateSliderPercentFromMouseEvent = function($slider, event) {
     var offsetX = event.pageX - $slider.offset().left;
     var sliderWidth = $slider.width();
@@ -240,7 +240,7 @@ blocJams.directive('slider', ['$document', function($document) {
           $document.unbind('mouseup.thumb');
         });
       };
-    }; 
+    } 
   };
 }]);
 
