@@ -173,6 +173,11 @@ blocJams.service('SongPlayer', function(){
       var song = this.currentAlbum.songs[currentTrackIndex];
       this.setSong(this.currentAlbum, song);
     },
+    seek: function(time) {
+      if(currentSoundFile) {
+        currentSoundFile.setTime(time);
+      }
+    },
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
@@ -224,6 +229,10 @@ blocJams.directive('slider', ['$document', function($document) {
       scope.value = 0;
       scope.max = 100;
       var $seekBar = $(element);
+
+      attributes.$observe('value', function(newValue) {
+        scope.value = numberFromValue(newValue, 0);
+      });
 
       attributes.$observe('max', function(newValue) {
         scope.max = numberFromValue(newValue, 100) || 100;
