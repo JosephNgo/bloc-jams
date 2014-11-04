@@ -25,7 +25,7 @@
 
     <div class="right-controls player-bar-control-group">
       <div class="volume">
-        <i class="fa" ng-click="volumeMute()" ng-class="volumeClass()"></i>
+        <i class="fa" ng-click="songPlayer.setVolume(value)" ng-class="volumeClass()"></i>
         <slider value="{{songPlayer.volume}}" max="100" on-change="songPlayer.setVolume(value)"></slider>
       </div> <!-- end of volume -->
 
